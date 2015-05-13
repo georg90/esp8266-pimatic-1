@@ -1,4 +1,4 @@
-print("test")
+print("Now inside main.lc")
 --- config
 tmr.delay(1000000)
 hum = 0
@@ -7,7 +7,7 @@ _G.PIN = 4                              -- GPIO2
 contentLength = 0                   
 _G.base64login = ""                     -- user:pwassword (pimatic) in BASE64
 _G.pimaticServer = "192.168.178.1"      -- pimatic server IP
-
+_G.pimaticPort = "80"
 file.open("time.lua", "r")
 _G.interval = file.readline()           -- send data every X seconds
 file.close()
@@ -42,11 +42,17 @@ function site()
             conn:send('<hr>\n')
             conn:send('<form action="" method="POST">\n')
             conn:send('<p>Pimatic Server IP Address:</p>')
-            conn:send('<input type="text" placeholder="xxx.xxx.xxx.xxx" name="IPaddress">')
-            conn:send('<input type="submit" value="IPaddress">')
+            conn:send('<input type="text" placeholder="'..pimaticServer..'" name="IPaddress">\n')
+            conn:send('<input type="submit" value="Change">')
             conn:send('</form>')
             conn:send('<hr>\n')
-            conn:send('<p>How often should your ESP8266 send data:</p>')
+            conn:send('<form action="" method="POST">\n')
+            conn:send('<p>Pimatic Server Port:</p>')
+            conn:send('<input type="text" placeholder="'..pimaticPort..'" name="Port">\n')
+            conn:send('<input type="submit" value="Change">')
+            conn:send('</form>')
+            conn:send('<hr>\n')
+            conn:send('<p>How often should your ESP8266 send data: (all other settings will be lost!)</p>')
             conn:send('<form action="" method="POST">\n')
             conn:send('<input type="submit" name="interv" value="30">\n')
             conn:send('<input type="submit" name="interv" value="60">\n')
@@ -68,6 +74,7 @@ function site()
             conn:send('<p>Data PIN: '..PIN..'</p>')
             conn:send('<p>Device: '..device..'</p>')
             conn:send('<p>Pimatic IP: '..pimaticServer..'</p>')
+            conn:send('<p>Pimatic Port: '..pimaticPort..'</p>')
             conn:send('</body></html>\n')
             conn:on("sent",function(conn) conn:close() end)
         end)
@@ -86,7 +93,7 @@ function sendData(type, name)
     print("Sending data ...")
     conn=net.createConnection(net.TCP, 0) 
     conn:on("receive", function(conn, payload) print(payload) end)
-    conn:connect(80,pimaticServer)
+    conn:connect(pimaticPort,pimaticServer)
     conn:send("PATCH /api/variables/esp01-"..name.." HTTP/1.1\r\n")
     conn:send("Authorization: Basic "..base64login.."\r\n")
     conn:send("Host: "..pimaticServer.."\r\n")
