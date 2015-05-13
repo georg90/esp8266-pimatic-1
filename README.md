@@ -13,6 +13,10 @@ Pimatic
 - pimatic has to have two variables to be named "$esp01-hum" and "$esp01-tem"
 - to show the data on the homescreen add a VariablesDevice in pimatic 
 
+TODO:
+- Add custom variable support
+- implement "restart proofed variables"
+
 
 Changelog:
 
