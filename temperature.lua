@@ -19,6 +19,7 @@ function read(PIN,DEVICE)
         dht22 = nil
         package.loaded["dht22"]=nil
     else
+        print("inside ds function")
         ds18 = require("ds18b20")
         ds18.setup(PIN)
         temp = ds18.read()
