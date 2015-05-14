@@ -1,8 +1,7 @@
 # esp8266-pimatic
 Send DHT22 or DS18B20 temperature and humidity data to pimatic server using an esp8266
 
-![WebUI](https://raw.githubusercontent.com/georg90/esp8266-pimatic-1/master/screenshots/esp8266pimatic.png "WebUI")
-
+![WebUI](https://raw.githubusercontent.com/georg90/esp8266-pimatic-1/9495706ba802bfd2b19eb042fd6e1e813dc2884c/screenshots/esp8266pimatic.png "WebUI")
 Setup:
 
 ESP8266
