@@ -13,8 +13,8 @@ Pimatic
 - to show the data on the homescreen add a VariablesDevice in pimatic 
 
 TODO:
-- Add custom variable support
-- implement "restart proofed variables"
+- [x] Add custom variable support
+- [x] implement "restart proofed variables"
 
 
 Changelog:
